@@ -12,14 +12,14 @@ namespace ciaod_laba12_13
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            dataGridView1.Rows.Add(7);
+            dataGridView1.Rows.Add(2);
             dataGridView1.Rows[0].Cells[1].Value = "Обмен";
             dataGridView1.Rows[1].Cells[1].Value = "Выбор";
-            dataGridView1.Rows[2].Cells[1].Value = "Включение";
-            dataGridView1.Rows[3].Cells[1].Value = "Шелла";
-            dataGridView1.Rows[4].Cells[1].Value = "Быстрая";
-            dataGridView1.Rows[5].Cells[1].Value = "Линейная";
-            dataGridView1.Rows[6].Cells[1].Value = "Встроенная";
+            //dataGridView1.Rows[2].Cells[1].Value = "Включение";
+            //dataGridView1.Rows[3].Cells[1].Value = "Шелла";
+            //dataGridView1.Rows[4].Cells[1].Value = "Быстрая";
+            //dataGridView1.Rows[5].Cells[1].Value = "Линейная";
+            //dataGridView1.Rows[6].Cells[1].Value = "Встроенная";
             for (int i = 0; i < dataGridView1.Rows.Count; i++)
             {
                 dataGridView1.Rows[i].Cells[0].Value = true;
@@ -48,62 +48,52 @@ namespace ciaod_laba12_13
             int comparisons  = 0;
             int reinstallation = 0;
             time.Start();
-            //for (int i = 0; i < Array.Length - 1; i++)
-            //{
-            //    for (int j = (Array.Length - 1); j > i; j--) // для всех элементов после i-ого
-            //    {
-            //        comparisons++;
-            //        if (Array[j - 1] > Array[j]) // если текущий элемент меньше предыдущего
-            //        {
-            //            reinstallation++;
-            //            int temp = Array[j - 1]; // меняем их местами
-            //            Array[j - 1] = Array[j];
-            //            Array[j] = temp;
-            //        }
-            //    }
-            //}
-            for (int i = 0; i < Array.Length; i++)
+            bool have_reinstallation=true;
+            for (int i = 0; i < Array.Length - 1; i++)
             {
-                for (int j = 0; j < Array.Length - 1; j++)
+                have_reinstallation = false;
+                for (int j = 0; j < Array.Length-i - 1; j++)
                 {
                     comparisons++;
                     if (Array[j] > Array[j + 1])
                     {
+                        have_reinstallation = true;
                         reinstallation++;
                         int temp = Array[j];
                         Array[j] = Array[j + 1];
                         Array[j + 1] = temp;
                     }
                 }
+                if (have_reinstallation == false)
+                {
+                    break;
+                }
             }
             time.Stop();
             return new rezult(time.ElapsedMilliseconds,comparisons, reinstallation);
         }
 
-        static public rezult ViborSort(int[] mas)
+        static public rezult ViborSort(int[] Array)
         {
             Stopwatch time = new Stopwatch();
             int comparisons = 0;
             int reinstallation = 0;
             time.Start();
-            for (int i = 0; i < mas.Length - 1; i++)
+            for (int i = 0; i < Array.Length - 1; i++)
             {
-                //поиск минимального числа
                 int min = i;
-                for (int j = i + 1; j < mas.Length; j++)
+                for (int j = i + 1; j < Array.Length; j++)
                 {
                     comparisons++;
-                    if (mas[j] < mas[min])
+                    if (Array[j] < Array[min])
                     {
-                        
                         min = j;
                     }
                 }
-                //обмен элементов
                 reinstallation++;
-                int temp = mas[min];
-                mas[min] = mas[i];
-                mas[i] = temp;
+                int temp = Array[min];
+                Array[min] = Array[i];
+                Array[i] = temp;
             }
             time.Stop();
             return new rezult(time.ElapsedMilliseconds, comparisons, reinstallation);
@@ -117,6 +107,8 @@ namespace ciaod_laba12_13
 
         private void button2_Click(object sender, EventArgs e)
         {
+            label2.Visible = false;
+            label2.Text= string.Empty;
             for(int i=0;i< dataGridView1.Rows.Count; i++)
             {
                 for (int j = 2; j < 5; j++)
@@ -147,6 +139,20 @@ namespace ciaod_laba12_13
                 dataGridView1.Rows[1].Cells[3].Value = Convert.ToString(rez.reinstallation);
                 dataGridView1.Rows[1].Cells[4].Value = Convert.ToString(rez.time);
             }
+            bool cheked = false;
+            for(int i = 0; i < dataGridView1.Rows.Count; i++)
+            {
+                if (dataGridView1.Rows[i].Cells[0].Value.Equals(true))
+                {
+                    cheked = true;
+                }
+
+            }
+            if (!cheked) {
+                label2.Visible = true;
+                label2.Text = "Ничего не выбрано";
+            }
+
         }
     }
 }
