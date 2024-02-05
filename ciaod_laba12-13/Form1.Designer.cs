@@ -34,10 +34,12 @@
             Column3 = new DataGridViewTextBoxColumn();
             Column4 = new DataGridViewTextBoxColumn();
             Column5 = new DataGridViewTextBoxColumn();
+            ColumnSorted = new DataGridViewTextBoxColumn();
             button1 = new Button();
             numericUpDown1 = new NumericUpDown();
             label1 = new Label();
             button2 = new Button();
+            label2 = new Label();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
             SuspendLayout();
@@ -48,10 +50,10 @@
             dataGridView1.AllowUserToDeleteRows = false;
             dataGridView1.AllowUserToResizeColumns = false;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2, Column3, Column4, Column5 });
+            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2, Column3, Column4, Column5, ColumnSorted });
             dataGridView1.Location = new Point(12, 12);
             dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(800, 376);
+            dataGridView1.Size = new Size(915, 376);
             dataGridView1.TabIndex = 0;
             // 
             // Column1
@@ -67,7 +69,7 @@
             Column2.ReadOnly = true;
             Column2.Resizable = DataGridViewTriState.True;
             Column2.SortMode = DataGridViewColumnSortMode.NotSortable;
-            Column2.Width = 189;
+            Column2.Width = 160;
             // 
             // Column3
             // 
@@ -76,7 +78,7 @@
             Column3.ReadOnly = true;
             Column3.Resizable = DataGridViewTriState.True;
             Column3.SortMode = DataGridViewColumnSortMode.NotSortable;
-            Column3.Width = 187;
+            Column3.Width = 160;
             // 
             // Column4
             // 
@@ -85,18 +87,24 @@
             Column4.ReadOnly = true;
             Column4.Resizable = DataGridViewTriState.True;
             Column4.SortMode = DataGridViewColumnSortMode.NotSortable;
-            Column4.Width = 187;
+            Column4.Width = 160;
             // 
             // Column5
             // 
             Column5.HeaderText = "Время";
             Column5.Name = "Column5";
             Column5.ReadOnly = true;
-            Column5.Width = 187;
+            Column5.Width = 170;
+            // 
+            // ColumnSorted
+            // 
+            ColumnSorted.HeaderText = "Отсортировано?";
+            ColumnSorted.Name = "ColumnSorted";
+            ColumnSorted.Width = 160;
             // 
             // button1
             // 
-            button1.Location = new Point(718, 398);
+            button1.Location = new Point(833, 398);
             button1.Name = "button1";
             button1.Size = new Size(94, 44);
             button1.TabIndex = 1;
@@ -112,7 +120,7 @@
             numericUpDown1.Name = "numericUpDown1";
             numericUpDown1.Size = new Size(113, 23);
             numericUpDown1.TabIndex = 2;
-            numericUpDown1.Value = new decimal(new int[] { 1, 0, 0, 0 });
+            numericUpDown1.Value = new decimal(new int[] { 1000, 0, 0, 0 });
             // 
             // label1
             // 
@@ -134,11 +142,21 @@
             button2.UseVisualStyleBackColor = true;
             button2.Click += button2_Click;
             // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(516, 413);
+            label2.Name = "label2";
+            label2.Size = new Size(38, 15);
+            label2.TabIndex = 5;
+            label2.Text = "label2";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(820, 451);
+            ClientSize = new Size(939, 455);
+            Controls.Add(label2);
             Controls.Add(button2);
             Controls.Add(label1);
             Controls.Add(numericUpDown1);
@@ -165,5 +183,7 @@
         private DataGridViewTextBoxColumn Column3;
         private DataGridViewTextBoxColumn Column4;
         private DataGridViewTextBoxColumn Column5;
+        private DataGridViewTextBoxColumn ColumnSorted;
+        private Label label2;
     }
 }
