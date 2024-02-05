@@ -81,6 +81,10 @@ namespace ciaod_laba12_13
                 {
                     break;
                 }
+                if (have_reinstallation == false)
+                {
+                    break;
+                }
             }
             time.Stop();
             return new rezult(time.ElapsedMilliseconds,comparisons, reinstallation,Array);
