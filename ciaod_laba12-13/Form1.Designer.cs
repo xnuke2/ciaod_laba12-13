@@ -51,20 +51,23 @@
             dataGridView1.AllowUserToResizeColumns = false;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2, Column3, Column4, Column5, ColumnSorted });
-            dataGridView1.Location = new Point(12, 12);
+            dataGridView1.Location = new Point(10, 9);
+            dataGridView1.Margin = new Padding(3, 2, 3, 2);
             dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(915, 376);
+            dataGridView1.Size = new Size(905, 282);
             dataGridView1.TabIndex = 0;
             // 
             // Column1
             // 
             Column1.HeaderText = "";
+            Column1.MinimumWidth = 6;
             Column1.Name = "Column1";
             Column1.Width = 50;
             // 
             // Column2
             // 
             Column2.HeaderText = "Название сортировки";
+            Column2.MinimumWidth = 6;
             Column2.Name = "Column2";
             Column2.ReadOnly = true;
             Column2.Resizable = DataGridViewTriState.True;
@@ -74,6 +77,7 @@
             // Column3
             // 
             Column3.HeaderText = "Сравнения";
+            Column3.MinimumWidth = 6;
             Column3.Name = "Column3";
             Column3.ReadOnly = true;
             Column3.Resizable = DataGridViewTriState.True;
@@ -83,6 +87,7 @@
             // Column4
             // 
             Column4.HeaderText = "Перестановки";
+            Column4.MinimumWidth = 6;
             Column4.Name = "Column4";
             Column4.ReadOnly = true;
             Column4.Resizable = DataGridViewTriState.True;
@@ -92,6 +97,7 @@
             // Column5
             // 
             Column5.HeaderText = "Время";
+            Column5.MinimumWidth = 6;
             Column5.Name = "Column5";
             Column5.ReadOnly = true;
             Column5.Width = 170;
@@ -104,7 +110,8 @@
             // 
             // button1
             // 
-            button1.Location = new Point(833, 398);
+            button1.Location = new Point(816, 295);
+            button1.Margin = new Padding(3, 2, 3, 2);
             button1.Name = "button1";
             button1.Size = new Size(94, 44);
             button1.TabIndex = 1;
@@ -114,7 +121,7 @@
             // 
             // numericUpDown1
             // 
-            numericUpDown1.Location = new Point(365, 407);
+            numericUpDown1.Location = new Point(375, 308);
             numericUpDown1.Maximum = new decimal(new int[] { 100000000, 0, 0, 0 });
             numericUpDown1.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             numericUpDown1.Name = "numericUpDown1";
@@ -125,7 +132,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(263, 409);
+            label1.Location = new Point(263, 310);
             label1.Name = "label1";
             label1.Size = new Size(96, 15);
             label1.TabIndex = 3;
@@ -134,7 +141,7 @@
             // button2
             // 
             button2.FlatStyle = FlatStyle.Popup;
-            button2.Location = new Point(12, 398);
+            button2.Location = new Point(12, 299);
             button2.Name = "button2";
             button2.Size = new Size(214, 40);
             button2.TabIndex = 4;
@@ -145,17 +152,16 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(516, 413);
+            label2.Location = new Point(529, 412);
             label2.Name = "label2";
-            label2.Size = new Size(38, 15);
+            label2.Size = new Size(0, 15);
             label2.TabIndex = 5;
-            label2.Text = "label2";
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(939, 455);
+            ClientSize = new Size(922, 341);
             Controls.Add(label2);
             Controls.Add(button2);
             Controls.Add(label1);
@@ -163,7 +169,7 @@
             Controls.Add(button1);
             Controls.Add(dataGridView1);
             Name = "Form1";
-            Text = "Form1";
+            Text = "Хмыренков лабораторная 12-13";
             Load += Form1_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
