@@ -122,18 +122,33 @@ namespace ciaod_laba12_13
             time.Start();
             int comparisons = 0;
             int reinstallation = 0;
+            int min = Array[0];
+            int j = 0;
+            for (int i = 1; i < Array.Length; i++)
+            {
+                comparisons++;
+                if (Array[i] < min)
+                {
+                    min = Array[i];
+                    j = i;
+                }
+            }
+            Array[j] = Array[0];
+            Array[0] = min;
+            reinstallation += 2;
             for (int i = 1; i < Array.Length; i++)
             {
                 int value = Array[i]; 
                 int index = i;     
-                while ((index > 0) && (Array[index - 1] > value))
+                while (Array[index - 1] > value)
                 {
                     comparisons++;
                     reinstallation++;
                     Array[index] = Array[index - 1];
                     index--;    
                 }
-                
+                comparisons++;
+                reinstallation++;
                 Array[index] = value;
             }
             time.Stop();
@@ -151,7 +166,7 @@ namespace ciaod_laba12_13
             label2.Text= string.Empty;
             for(int i=0;i< dataGridView1.Rows.Count; i++)
             {
-                for (int j = 2; j < 5; j++)
+                for (int j = 2; j < 6; j++)
                 {
                     dataGridView1.Rows[i].Cells[j].Value = "";
                 }
@@ -217,6 +232,7 @@ namespace ciaod_laba12_13
                 if (dataGridView1.Rows[i].Cells[0].Value.Equals(true))
                 {
                     cheked = true;
+                    break;
                 }
 
             }
