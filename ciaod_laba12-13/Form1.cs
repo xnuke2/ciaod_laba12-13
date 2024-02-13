@@ -1,3 +1,4 @@
+using System;
 using System.Diagnostics;
 using System.Drawing;
 
@@ -12,12 +13,12 @@ namespace ciaod_laba12_13
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            dataGridView1.Rows.Add(3);
+            dataGridView1.Rows.Add(4);
             dataGridView1.Rows[0].Cells[1].Value = "Обмен";
             dataGridView1.Rows[1].Cells[1].Value = "Выбор";
             dataGridView1.Rows[2].Cells[1].Value = "Включение";
-            //dataGridView1.Rows[3].Cells[1].Value = "Шелла";
-            //dataGridView1.Rows[4].Cells[1].Value = "Быстрая";
+            dataGridView1.Rows[3].Cells[1].Value = "Быстрая";
+            //dataGridView1.Rows[4].Cells[1].Value = "Шелла";
             //dataGridView1.Rows[5].Cells[1].Value = "Линейная";
             //dataGridView1.Rows[6].Cells[1].Value = "Встроенная";
             for (int i = 0; i < dataGridView1.Rows.Count; i++)
@@ -140,7 +141,7 @@ namespace ciaod_laba12_13
             {
                 int value = Array[i]; 
                 int index = i;     
-                while (Array[index - 1] > value)
+                while ((index > 0) && (Array[index - 1] > value))
                 {
                     comparisons++;
                     reinstallation++;
@@ -154,6 +155,84 @@ namespace ciaod_laba12_13
             time.Stop();
             return new rezult(time.ElapsedMilliseconds,comparisons, reinstallation, Array);
         }
+
+        static public rezult Quicksort(int[] array,int startindex,int endindex)
+        {
+            Stopwatch time = new Stopwatch();
+            time.Start();
+            int index = startindex;
+            int comparisons = 0;
+            int reinstallation = 0;
+            for (int i = startindex+1; i < endindex; i++)
+            {
+                comparisons++;
+                if (array[i] < array[index])
+                {
+                    reinstallation += 2;
+                    int tmp = array[index];
+                    array[index]= array[index+1];
+                    array[index+1] = tmp;
+                    //while (index < j)
+                    //{
+                    //    comparisons++;
+                    //    reinstallation++;
+                    //    array[j] = array[j-1];
+                    //    j--;
+                    //}
+                    tmp = array[i];
+                    array[i] = array[index];
+                    array[index] = tmp;
+                    index++;
+                }
+            }
+
+            rezult rez1 = QuicksortWT(array,startindex,index);
+            rezult rez2 = QuicksortWT(array,index+1,endindex);
+            time.Stop();
+            return new rezult(time.ElapsedMilliseconds, comparisons + rez1.comparisons+rez2.comparisons, reinstallation+rez1.reinstallation+rez2.reinstallation, array);
+        }
+        static public rezult QuicksortWT(int[] array, int startindex, int endindex)
+        {
+            if (startindex >= endindex)
+            {
+                rezult rezult = new rezult();
+                rezult.comparisons = 1;
+                return rezult;
+            }
+            int index = startindex;
+            int comparisons = 0;
+            int reinstallation = 0;
+            for (int i = startindex + 1; i < endindex; i++)
+            {
+                comparisons++;
+                if (array[i] < array[index])
+                {
+                    reinstallation += 2;
+                    int tmp = array[index];
+                    array[index] = array[index + 1];
+                    array[index + 1] = tmp;
+                    //while (index < j)
+                    //{
+                    //    comparisons++;
+                    //    reinstallation++;
+                    //    array[j] = array[j-1];
+                    //    j--;
+                    //}
+                    tmp = array[i];
+                    array[i] = array[index];
+                    array[index] = tmp;
+                    index++;
+                }
+            }
+
+            rezult rez1 = Quicksort(array, startindex, index);
+            rezult rez2 = Quicksort(array, index + 1, endindex);
+            rezult rez = new rezult();
+            rez.comparisons = comparisons+rez1.comparisons+rez2.comparisons;
+            rez.reinstallation=reinstallation+rez1.reinstallation+rez2.reinstallation;
+            return rez;
+        }
+
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -224,6 +303,22 @@ namespace ciaod_laba12_13
                 else
                 {
                     dataGridView1.Rows[2].Cells[5].Value = "нет";
+                }
+            }
+            if (dataGridView1.Rows[3].Cells[0].Value.Equals(true))
+            {
+                int[] array_tmp = (int[])array.Clone();
+                 rez = Quicksort(array_tmp,0,array_tmp.Length);
+                dataGridView1.Rows[3].Cells[2].Value = Convert.ToString(rez.comparisons);
+                dataGridView1.Rows[3].Cells[3].Value = Convert.ToString(rez.reinstallation);
+                dataGridView1.Rows[3].Cells[4].Value = Convert.ToString(rez.time);
+                if (Check(rez.newArray))
+                {
+                    dataGridView1.Rows[3].Cells[5].Value = "да";
+                }
+                else
+                {
+                    dataGridView1.Rows[3].Cells[5].Value = "нет";
                 }
             }
             bool cheked = false;
