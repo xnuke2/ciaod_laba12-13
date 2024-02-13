@@ -29,9 +29,9 @@ namespace ciaod_laba12_13
         }
         public struct rezult
         {
-            public long time;
-            public int comparisons;
-            public int reinstallation;
+            public ulong time;
+            public ulong comparisons;
+            public ulong reinstallation;
             public int[] newArray;
             public rezult()
             {
@@ -39,9 +39,16 @@ namespace ciaod_laba12_13
             }
             public rezult(long _time, int _comparisons,int _reinstallation, int[] _newArray)
             {
-                time= _time;
-                comparisons= _comparisons;
-                reinstallation= _reinstallation;
+                time= (ulong)_time;
+                comparisons= (ulong)_comparisons;
+                reinstallation= (ulong)_reinstallation;
+                newArray = _newArray;
+            }
+            public rezult(long _time, ulong _comparisons, ulong _reinstallation, int[] _newArray)
+            {
+                time = (ulong)_time;
+                comparisons = _comparisons;
+                reinstallation = _reinstallation;
                 newArray = _newArray;
             }
         }
@@ -161,8 +168,8 @@ namespace ciaod_laba12_13
             Stopwatch time = new Stopwatch();
             time.Start();
             int index = startindex;
-            int comparisons = 0;
-            int reinstallation = 0;
+            ulong comparisons = 0;
+            ulong reinstallation = 0;
             for (int i = startindex+1; i < endindex; i++)
             {
                 comparisons++;
@@ -170,7 +177,8 @@ namespace ciaod_laba12_13
                 {
                     reinstallation += 2;
                     int tmp = array[index];
-                    array[index]= array[index+1];
+                    array[index] = array[i];
+                    array[i]= array[index+1];
                     array[index+1] = tmp;
                     //while (index < j)
                     //{
@@ -179,9 +187,8 @@ namespace ciaod_laba12_13
                     //    array[j] = array[j-1];
                     //    j--;
                     //}
-                    tmp = array[i];
-                    array[i] = array[index];
-                    array[index] = tmp;
+
+                    
                     index++;
                 }
             }
@@ -200,8 +207,8 @@ namespace ciaod_laba12_13
                 return rezult;
             }
             int index = startindex;
-            int comparisons = 0;
-            int reinstallation = 0;
+            ulong comparisons = 0;
+            ulong reinstallation = 0;
             for (int i = startindex + 1; i < endindex; i++)
             {
                 comparisons++;
@@ -209,18 +216,9 @@ namespace ciaod_laba12_13
                 {
                     reinstallation += 2;
                     int tmp = array[index];
-                    array[index] = array[index + 1];
+                    array[index] = array[i];
+                    array[i] = array[index + 1];
                     array[index + 1] = tmp;
-                    //while (index < j)
-                    //{
-                    //    comparisons++;
-                    //    reinstallation++;
-                    //    array[j] = array[j-1];
-                    //    j--;
-                    //}
-                    tmp = array[i];
-                    array[i] = array[index];
-                    array[index] = tmp;
                     index++;
                 }
             }
