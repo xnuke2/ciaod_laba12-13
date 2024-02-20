@@ -172,7 +172,7 @@ namespace ciaod_laba12_13
             ulong reinstallation = 0;
             for (int i = startindex+1; i < endindex; i++)
             {
-                comparisons++;
+                comparisons+=2;
                 if (array[i] < array[index])
                 {
                     reinstallation += 2;
@@ -202,7 +202,7 @@ namespace ciaod_laba12_13
             ulong reinstallation = 0;
             for (int i = startindex + 1; i < endindex; i++)
             {
-                comparisons++;
+                comparisons+=2;
                 if (array[i] < array[index])
                 {
                     reinstallation += 2;
