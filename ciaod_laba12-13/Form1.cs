@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 
@@ -13,12 +14,12 @@ namespace ciaod_laba12_13
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            dataGridView1.Rows.Add(4);
+            dataGridView1.Rows.Add(5);
             dataGridView1.Rows[0].Cells[1].Value = "Обмен";
             dataGridView1.Rows[1].Cells[1].Value = "Выбор";
             dataGridView1.Rows[2].Cells[1].Value = "Включение";
             dataGridView1.Rows[3].Cells[1].Value = "Быстрая";
-            //dataGridView1.Rows[4].Cells[1].Value = "Шелла";
+            dataGridView1.Rows[4].Cells[1].Value = "Шелла";
             //dataGridView1.Rows[5].Cells[1].Value = "Линейная";
             //dataGridView1.Rows[6].Cells[1].Value = "Встроенная";
             for (int i = 0; i < dataGridView1.Rows.Count; i++)
@@ -222,6 +223,42 @@ namespace ciaod_laba12_13
             return rez;
         }
 
+        rezult ShellSort(int[] array)
+        {
+            ulong comparisons = 0;
+            ulong reinstallation = 0;
+            int gap = array.Length / 2;
+            var sw = new Stopwatch();
+            sw.Start();
+            int j;
+            int step = array.Length / 2;
+
+            while (step > 0)
+            {
+                comparisons++;
+                for (int i = 0; i < (array.Length - step); i++)
+                {
+                    comparisons++;
+                    j = i;
+                    while ((j >= 0) && (array[j] > array[j + step]))
+                    {
+                        comparisons += 2;
+                        int tmp = array[j];
+                        array[j] = array[j + step];
+                        array[j + step] = tmp;
+                        j -= step;
+                        reinstallation++;
+                    }
+                    comparisons += 2;
+                }
+                double c = ((double)step - 1) / 3;
+                step =Convert.ToInt32( Math.Ceiling(c));
+            }
+
+            sw.Stop();
+            return new rezult(sw.ElapsedMilliseconds, comparisons, reinstallation,array);
+        }
+
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -308,6 +345,22 @@ namespace ciaod_laba12_13
                 else
                 {
                     dataGridView1.Rows[3].Cells[5].Value = "нет";
+                }
+            }
+            if (dataGridView1.Rows[4].Cells[0].Value.Equals(true))
+            {
+                int[] array_tmp = (int[])array.Clone();
+                rez = ShellSort(array_tmp);
+                dataGridView1.Rows[4].Cells[2].Value = Convert.ToString(rez.comparisons);
+                dataGridView1.Rows[4].Cells[3].Value = Convert.ToString(rez.reinstallation);
+                dataGridView1.Rows[4].Cells[4].Value = Convert.ToString(rez.time);
+                if (Check(rez.newArray))
+                {
+                    dataGridView1.Rows[4].Cells[5].Value = "да";
+                }
+                else
+                {
+                    dataGridView1.Rows[4].Cells[5].Value = "нет";
                 }
             }
             bool cheked = false;
