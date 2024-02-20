@@ -231,28 +231,29 @@ namespace ciaod_laba12_13
             var sw = new Stopwatch();
             sw.Start();
             int j;
-            int step = array.Length / 2;
-
+            int step =1;
+            while (step <= array.Length / 3)
+            {
+                step = 3 * step + 1;
+            }
             while (step > 0)
             {
-                comparisons++;
                 for (int i = 0; i < (array.Length - step); i++)
                 {
-                    comparisons++;
                     j = i;
-                    while ((j >= 0) && (array[j] > array[j + step]))
+                    int tmp = array[j+step];
+                    while ((j >= 0) && (array[j] > tmp))
                     {
-                        comparisons += 2;
-                        int tmp = array[j];
-                        array[j] = array[j + step];
-                        array[j + step] = tmp;
+                        comparisons ++;
+                        array[j + step] = array[j];
                         j -= step;
                         reinstallation++;
                     }
-                    comparisons += 2;
+                    array[j + step] = tmp;
+                    
+                    comparisons ++;
                 }
-                double c = ((double)step - 1) / 3;
-                step =Convert.ToInt32( Math.Ceiling(c));
+                step = (step - 1) / 3;
             }
 
             sw.Stop();
