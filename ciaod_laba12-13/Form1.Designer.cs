@@ -40,6 +40,7 @@
             label1 = new Label();
             button2 = new Button();
             label2 = new Label();
+            label3 = new Label();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
             SuspendLayout();
@@ -54,7 +55,7 @@
             dataGridView1.Location = new Point(11, 12);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(913, 376);
+            dataGridView1.Size = new Size(915, 376);
             dataGridView1.TabIndex = 0;
             // 
             // Column1
@@ -111,7 +112,7 @@
             // 
             // button1
             // 
-            button1.Location = new Point(817, 393);
+            button1.Location = new Point(819, 393);
             button1.Name = "button1";
             button1.Size = new Size(107, 59);
             button1.TabIndex = 1;
@@ -159,11 +160,23 @@
             label2.Size = new Size(0, 20);
             label2.TabIndex = 5;
             // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.ForeColor = Color.Red;
+            label3.Location = new Point(602, 415);
+            label3.Name = "label3";
+            label3.Size = new Size(177, 20);
+            label3.TabIndex = 6;
+            label3.Text = "не выбрана сортировка";
+            label3.Visible = false;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(932, 455);
+            ClientSize = new Size(931, 455);
+            Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(button2);
             Controls.Add(label1);
@@ -194,5 +207,6 @@
         private DataGridViewTextBoxColumn Column5;
         private DataGridViewTextBoxColumn ColumnSorted;
         private Label label2;
+        private Label label3;
     }
 }
