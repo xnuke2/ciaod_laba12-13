@@ -40,6 +40,7 @@
             label1 = new Label();
             button2 = new Button();
             label2 = new Label();
+            label3 = new Label();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
             SuspendLayout();
@@ -51,10 +52,11 @@
             dataGridView1.AllowUserToResizeColumns = false;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2, Column3, Column4, Column5, ColumnSorted });
-            dataGridView1.Location = new Point(11, 12);
+            dataGridView1.Location = new Point(10, 9);
+            dataGridView1.Margin = new Padding(3, 2, 3, 2);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(913, 376);
+            dataGridView1.Size = new Size(905, 282);
             dataGridView1.TabIndex = 0;
             // 
             // Column1
@@ -111,9 +113,10 @@
             // 
             // button1
             // 
-            button1.Location = new Point(817, 393);
+            button1.Location = new Point(821, 295);
+            button1.Margin = new Padding(3, 2, 3, 2);
             button1.Name = "button1";
-            button1.Size = new Size(107, 59);
+            button1.Size = new Size(94, 44);
             button1.TabIndex = 1;
             button1.Text = "выход";
             button1.UseVisualStyleBackColor = true;
@@ -121,31 +124,29 @@
             // 
             // numericUpDown1
             // 
-            numericUpDown1.Location = new Point(429, 411);
-            numericUpDown1.Margin = new Padding(3, 4, 3, 4);
+            numericUpDown1.Location = new Point(375, 308);
             numericUpDown1.Maximum = new decimal(new int[] { 100000000, 0, 0, 0 });
             numericUpDown1.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             numericUpDown1.Name = "numericUpDown1";
-            numericUpDown1.Size = new Size(129, 27);
+            numericUpDown1.Size = new Size(113, 23);
             numericUpDown1.TabIndex = 2;
             numericUpDown1.Value = new decimal(new int[] { 10000, 0, 0, 0 });
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(301, 413);
+            label1.Location = new Point(263, 310);
             label1.Name = "label1";
-            label1.Size = new Size(122, 20);
+            label1.Size = new Size(96, 15);
             label1.TabIndex = 3;
             label1.Text = "Размер массива";
             // 
             // button2
             // 
             button2.FlatStyle = FlatStyle.Popup;
-            button2.Location = new Point(14, 399);
-            button2.Margin = new Padding(3, 4, 3, 4);
+            button2.Location = new Point(12, 299);
             button2.Name = "button2";
-            button2.Size = new Size(245, 53);
+            button2.Size = new Size(214, 40);
             button2.TabIndex = 4;
             button2.Text = "Сортировать";
             button2.UseVisualStyleBackColor = true;
@@ -154,23 +155,34 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(605, 549);
+            label2.Location = new Point(529, 412);
             label2.Name = "label2";
-            label2.Size = new Size(0, 20);
+            label2.Size = new Size(0, 15);
             label2.TabIndex = 5;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.ForeColor = Color.Red;
+            label3.Location = new Point(595, 312);
+            label3.Name = "label3";
+            label3.Size = new Size(38, 15);
+            label3.TabIndex = 6;
+            label3.Text = "label3";
+            label3.Visible = false;
             // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(932, 455);
+            ClientSize = new Size(927, 341);
+            Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(button2);
             Controls.Add(label1);
             Controls.Add(numericUpDown1);
             Controls.Add(button1);
             Controls.Add(dataGridView1);
-            Margin = new Padding(3, 4, 3, 4);
             Name = "Form1";
             Text = "Хмыренков лабораторная 12-13";
             Load += Form1_Load;
@@ -194,5 +206,6 @@
         private DataGridViewTextBoxColumn Column5;
         private DataGridViewTextBoxColumn ColumnSorted;
         private Label label2;
+        private Label label3;
     }
 }
