@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.Reflection;
+using System.Security.Policy;
 
 namespace ciaod_laba12_13
 {
@@ -14,7 +16,7 @@ namespace ciaod_laba12_13
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            dataGridView1.Rows.Add(7);
+            dataGridView1.Rows.Add(8);
             dataGridView1.Rows[0].Cells[1].Value = "Обмен";
             dataGridView1.Rows[1].Cells[1].Value = "Выбор";
             dataGridView1.Rows[2].Cells[1].Value = "Включение";
@@ -22,6 +24,7 @@ namespace ciaod_laba12_13
             dataGridView1.Rows[4].Cells[1].Value = "Шелла";
             dataGridView1.Rows[5].Cells[1].Value = "Линейная";
             dataGridView1.Rows[6].Cells[1].Value = "Встроенная";
+            dataGridView1.Rows[7].Cells[1].Value = "Пирамидальная";
             for (int i = 0; i < dataGridView1.Rows.Count; i++)
             {
                 dataGridView1.Rows[i].Cells[0].Value = true;
@@ -223,7 +226,7 @@ namespace ciaod_laba12_13
             return rez;
         }
 
-        rezult ShellSort(int[] array)
+        static public rezult ShellSort(int[] array)
         {
             ulong comparisons = 0;
             ulong reinstallation = 0;
@@ -260,7 +263,7 @@ namespace ciaod_laba12_13
             return new rezult(sw.ElapsedMilliseconds, comparisons, reinstallation,array);
         }
 
-        rezult LinearSort(int[] array)
+        static public rezult LinearSort(int[] array)
         {
             ulong comparisons = 0;
             ulong reinstallation = 0;
@@ -291,6 +294,111 @@ namespace ciaod_laba12_13
             return new rezult(sw.ElapsedMilliseconds, comparisons, reinstallation, array);
         }
 
+
+        static public rezult PyramidalSort(int[] array)
+        {
+            int length = array.Length;
+            ulong comparisons = 0;
+            ulong reinstallation = 0;
+            var sw = new Stopwatch();
+            sw.Start();
+            // Построение кучи (перегруппируем массив)
+            for (int i = length / 2 - 1; i >= 0; i--)
+                while (2 * i + 1 <= length)
+                {
+                    int j = 2 * i + 1;
+                    if (j + 1 < length && array[j] < array[j + 1]) j++;
+                    comparisons += 2;
+                    if ((array[i] >= array[j])) break;
+                    (array[i], array[j]) = (array[j], array[i]);
+                    reinstallation++;
+                    i = j;
+                }
+
+            // Один за другим извлекаем элементы из кучи
+            for (int i = length - 1; i >= 0; i--)
+            {
+                // Перемещаем текущий корень в конец
+
+                (array[0], array[i]) = (array[i], array[0]);
+
+                i = 0;
+                // вызываем процедуру heapify на уменьшенной куче
+                 while (2 * i + 1 <= length)
+                {
+                    int j = 2 * i + 1;
+                    if (j + 1 < length && array[j] < array[j + 1]) j++;
+                    comparisons += 2;
+                    if ((array[i] >= array[j])) break;
+                    (array[i], array[j]) = (array[j], array[i]);
+                    reinstallation++;
+                    i = j;
+                }
+            }
+            //int length= array.Length;
+
+
+            //for (int i = (length / 2); i >= 0; i--)
+            //{
+            //    while (2 * i + 1 <= length)
+            //    {
+            //        int j = 2 * i + 1;
+            //        if (j+1 < length && array[j] < array[j + 1]) j++;
+            //        comparisons+=2;
+            //        if ((array[i] >= array[j])) break;
+            //        (array[i], array[j]) = (array[j], array[i]);
+            //        reinstallation++;
+            //        i = j;
+            //    }
+            //}
+            //int size=length;
+            //while(size!=1)
+            //{
+            //    int i = 0;
+            //    (array[i], array[size - 1]) = (array[size - 1], array[i]);
+            //    size--;
+            //    while (2 * i + 1 < size)
+            //    {
+            //        int j = 2 * i + 1;
+            //        if (j  < size-1 && array[j] < array[j + 1]) j++;
+            //        comparisons += 2;
+            //        if ((array[i] >= array[j])) break;
+            //        (array[i], array[j]) = (array[j], array[i]);
+            //        reinstallation++;
+            //        i = j;
+            //    }
+                
+            //}    
+            sw.Stop();
+             return new rezult(sw.ElapsedMilliseconds, comparisons, reinstallation, array);
+            //
+        }
+        void heapify(int[] arr, int n, int i)
+        {
+            int largest = i;
+            // Инициализируем наибольший элемент как корень
+            int l = 2 * i + 1; // left = 2*i + 1
+            int r = 2 * i + 2; // right = 2*i + 2
+
+            // Если левый дочерний элемент больше корня
+            if (l < n && arr[l] > arr[largest])
+                largest = l;
+
+            // Если правый дочерний элемент больше, чем самый большой элемент на данный момент
+            if (r < n && arr[r] > arr[largest])
+                largest = r;
+
+            // Если самый большой элемент не корень
+            if (largest != i)
+            {
+                int swap = arr[i];
+                arr[i] = arr[largest];
+                arr[largest] = swap;
+
+                // Рекурсивно преобразуем в двоичную кучу затронутое поддерево
+                heapify(arr, n, largest);
+            }
+        }
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -428,6 +536,22 @@ namespace ciaod_laba12_13
                 else
                 {
                     dataGridView1.Rows[6].Cells[5].Value = "нет";
+                }
+            }
+            if (dataGridView1.Rows[7].Cells[0].Value.Equals(true))
+            {
+                int[] array_tmp = (int[])array.Clone();
+                rez = PyramidalSort(array_tmp);
+                dataGridView1.Rows[7].Cells[2].Value = Convert.ToString(rez.comparisons); ;
+                dataGridView1.Rows[7].Cells[3].Value = Convert.ToString(rez.reinstallation);
+                dataGridView1.Rows[7].Cells[4].Value = Convert.ToString(rez.time);
+                if (Check(array_tmp))
+                {
+                    dataGridView1.Rows[7].Cells[5].Value = "да";
+                }
+                else
+                {
+                    dataGridView1.Rows[7].Cells[5].Value = "нет";
                 }
             }
             bool cheked = false;
