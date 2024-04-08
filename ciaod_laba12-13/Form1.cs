@@ -230,12 +230,11 @@ namespace ciaod_laba12_13
         {
             ulong comparisons = 0;
             ulong reinstallation = 0;
-            int gap = array.Length / 2;
             var sw = new Stopwatch();
             sw.Start();
             int j;
-            int step =1;
-            while (step <= array.Length / 3)
+            int step =0;
+            while ((step*3+1)*3+1 < array.Length )
             {
                 step = 3 * step + 1;
             }
@@ -256,7 +255,7 @@ namespace ciaod_laba12_13
                     
                     comparisons ++;
                 }
-                step = (step - 1) / 3;
+                step = (step-1) / 3;
             }
 
             sw.Stop();
