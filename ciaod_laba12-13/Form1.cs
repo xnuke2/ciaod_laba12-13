@@ -301,102 +301,43 @@ namespace ciaod_laba12_13
             ulong reinstallation = 0;
             var sw = new Stopwatch();
             sw.Start();
-            // Построение кучи (перегруппируем массив)
-            for (int i = length / 2 - 1; i >= 0; i--)
-                while (2 * i + 1 <= length)
-                {
-                    int j = 2 * i + 1;
-                    if (j + 1 < length && array[j] < array[j + 1]) j++;
-                    comparisons += 2;
-                    if ((array[i] >= array[j])) break;
-                    (array[i], array[j]) = (array[j], array[i]);
-                    reinstallation++;
-                    i = j;
-                }
-
-            // Один за другим извлекаем элементы из кучи
-            for (int i = length - 1; i >= 0; i--)
+            for (int i = (length / 2-1); i >= 0; i--)
+            {
+                rezult tmp = fixDown(array, length, i);
+                comparisons += tmp.comparisons;
+                reinstallation += tmp.reinstallation;
+            }
+            for (int i = length - 1; i > 0; i--)
             {
                 // Перемещаем текущий корень в конец
-
                 (array[0], array[i]) = (array[i], array[0]);
 
-                i = 0;
                 // вызываем процедуру heapify на уменьшенной куче
-                 while (2 * i + 1 <= length)
-                {
-                    int j = 2 * i + 1;
-                    if (j + 1 < length && array[j] < array[j + 1]) j++;
-                    comparisons += 2;
-                    if ((array[i] >= array[j])) break;
-                    (array[i], array[j]) = (array[j], array[i]);
-                    reinstallation++;
-                    i = j;
-                }
+                rezult tmp =fixDown(array, i, 0);
+                comparisons += tmp.comparisons;
+                reinstallation+= tmp.reinstallation;
             }
-            //int length= array.Length;
 
-
-            //for (int i = (length / 2); i >= 0; i--)
-            //{
-            //    while (2 * i + 1 <= length)
-            //    {
-            //        int j = 2 * i + 1;
-            //        if (j+1 < length && array[j] < array[j + 1]) j++;
-            //        comparisons+=2;
-            //        if ((array[i] >= array[j])) break;
-            //        (array[i], array[j]) = (array[j], array[i]);
-            //        reinstallation++;
-            //        i = j;
-            //    }
-            //}
-            //int size=length;
-            //while(size!=1)
-            //{
-            //    int i = 0;
-            //    (array[i], array[size - 1]) = (array[size - 1], array[i]);
-            //    size--;
-            //    while (2 * i + 1 < size)
-            //    {
-            //        int j = 2 * i + 1;
-            //        if (j  < size-1 && array[j] < array[j + 1]) j++;
-            //        comparisons += 2;
-            //        if ((array[i] >= array[j])) break;
-            //        (array[i], array[j]) = (array[j], array[i]);
-            //        reinstallation++;
-            //        i = j;
-            //    }
-                
-            //}    
             sw.Stop();
              return new rezult(sw.ElapsedMilliseconds, comparisons, reinstallation, array);
             //
         }
-        void heapify(int[] arr, int n, int i)
+
+        static rezult fixDown(int[] array,int length, int i)
         {
-            int largest = i;
-            // Инициализируем наибольший элемент как корень
-            int l = 2 * i + 1; // left = 2*i + 1
-            int r = 2 * i + 2; // right = 2*i + 2
-
-            // Если левый дочерний элемент больше корня
-            if (l < n && arr[l] > arr[largest])
-                largest = l;
-
-            // Если правый дочерний элемент больше, чем самый большой элемент на данный момент
-            if (r < n && arr[r] > arr[largest])
-                largest = r;
-
-            // Если самый большой элемент не корень
-            if (largest != i)
+            ulong comparisons = 0;
+            ulong reinstallation = 0;
+            while (2 * i + 1 < length)
             {
-                int swap = arr[i];
-                arr[i] = arr[largest];
-                arr[largest] = swap;
-
-                // Рекурсивно преобразуем в двоичную кучу затронутое поддерево
-                heapify(arr, n, largest);
+                int j = 2 * i + 1;
+                if (j+1 < length && array[j] < array[j + 1]) j++;
+                comparisons+=2;
+                if ((array[i] >= array[j])) break;
+                (array[i], array[j]) = (array[j], array[i]);
+                reinstallation++;
+                i = j;
             }
+            return new rezult(0,comparisons,reinstallation,array);
         }
 
         private void button1_Click(object sender, EventArgs e)
